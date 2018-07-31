@@ -1,10 +1,8 @@
 /***************************
  * Selection sort
  ***************************/
-function selectionSort(arr) {
-	let n = arr.length;
-
-	for(let i = 0; i < 10; i++) {
+function selectionSort(arr, n) {
+	for(let i = 0; i < n; i++) {
 		let minIndex = i;
 		for(let j = i + 1; j < n; j++) {
 			if (arr[minIndex] > arr[j]) {
@@ -20,6 +18,13 @@ function selectionSort(arr) {
 	return arr;	
 }
 
-let a = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-a = selectionSort(a);
-console.log(a);
+
+
+/***************************
+ * Test
+ ***************************/
+const SortTestHelper = require('./_helper.js');
+
+let a = SortTestHelper.generateRandomArray(100000, 0, 10000);
+// SortTestHelper.testSort('Selection sort', selectionSort, a, a.length);
+SortTestHelper.testSort('Selection sort', selectionSort, a, a.length);
