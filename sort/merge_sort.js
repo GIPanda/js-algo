@@ -48,7 +48,7 @@ function advancedMergeSort(arr, l, r) {
 	if (r -l <= 15) {
 		insertionSort.range(arr, l, r);
 		return;
-	}
+	}	
 
 	const mid = Math.floor((l+r)/2);
 	advancedMergeSort(arr, l, mid);

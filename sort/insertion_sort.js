@@ -22,7 +22,7 @@ exports.range = function(arr, l, r) {
 	for (let i=l; i<=r; i++) {
 		let e= arr[i];
 		let j;
-		for(j=i; j > l && arr[j-1] > e; j++) {
+		for(j=i; j > l && arr[j-1] > e; j--) {
 			arr[j] = arr[j-1];
 		}
 		arr[j] = e;
