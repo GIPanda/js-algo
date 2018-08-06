@@ -7,7 +7,6 @@ const insertionSort = require('./insertion_sort.js');
  * 缺点: 占用内存空间
  ***************************/
 function merge(arr, l, mid, r) {
-
 	let aux = [];
 	for(let i = l; i <= r; i++) {
 		aux.push(arr[i]);
@@ -43,7 +42,7 @@ function mergeSort(arr, l, r) {
 }
 
 
-function advancedMergeSort(arr, l, r) {
+function mergeSortAdvanced(arr, l, r) {
 
 	if (r -l <= 15) {
 		insertionSort.range(arr, l, r);
@@ -51,10 +50,38 @@ function advancedMergeSort(arr, l, r) {
 	}	
 
 	const mid = Math.floor((l+r)/2);
-	advancedMergeSort(arr, l, mid);
-	advancedMergeSort(arr, mid + 1, r);
+	mergeSortAdvanced(arr, l, mid);
+	mergeSortAdvanced(arr, mid + 1, r);
 	if (arr[mid] > arr[mid + 1]) {
 		merge(arr, l, mid, r);		
+	}
+}
+
+// 适用于链表
+function mergeSortBu(arr, n) {
+	for (let sz = 1; sz <= n; sz += sz) {
+		for(let i = 0; i < n; i += sz*2) {
+			merge(arr, i, i + sz - 1, Math.min(i + 2*sz - 1, n - 1));
+		}
+	}
+}
+
+
+function mergeSortBuAdvanced(arr, n) {
+	for (let i= 0; i<= n; i += 16) {
+		insertionSort.range(arr, i, Math.min(i + 15, n - 1));
+	}
+
+	for (let sz = 16; sz <= n; sz += sz) {
+
+		for(let i = 0; i < n; i += sz*2) {
+
+			let l =i, mid = i + sz -1, r = Math.min(i + 2*sz - 1, n - 1);
+
+			if (arr[mid] > arr[mid + 1]) {
+				merge(arr, l, mid, r);
+			}
+		}
 	}
 }
 
@@ -63,5 +90,9 @@ exports.basic = function (arr, n) {
 }
 
 exports.advanced = function(arr, n) {
-	advancedMergeSort(arr, 0, n-1);
+	mergeSortAdvanced(arr, 0, n-1);
 }
+
+// bottom-up merge sort
+exports.bu = mergeSortBu;
+exports.buAdvanced = mergeSortBuAdvanced;
