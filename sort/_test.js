@@ -23,7 +23,7 @@ const mergeSort = require('./merge_sort.js');
 const quickSort = require('./quick_sort.js');
 
 
-let n = 10000; 
+let n = 1000000; 
 let arr1 = SortTestHelper.generateRandomArray(n, 0, n);
 let arr2 = arr1.slice(0);
 let arr3 = arr1.slice(0);
